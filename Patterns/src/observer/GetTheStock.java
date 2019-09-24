@@ -21,7 +21,7 @@ public class GetTheStock implements Runnable{
     public void run() {
         for (int i = 0; i < 3; i++) {
 
-            double randomNumber = (Math.random() * 0.06) - 0.03;
+            double randomNumber = (Math.random() * 2.00) - 1.00;
 
             DecimalFormat df = new DecimalFormat("##.##");
             int delay = 0;

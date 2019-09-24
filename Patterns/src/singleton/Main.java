@@ -10,4 +10,5 @@ public class Main {
         System.out.println(mySingleton1.hashCode());
         System.out.println(mySingleton2.hashCode());
     }
+
 }
