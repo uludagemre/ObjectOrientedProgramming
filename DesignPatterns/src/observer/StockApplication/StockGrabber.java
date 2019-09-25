@@ -1,13 +1,13 @@
-package observer;
+package observer.StockApplication;
 
 import java.util.ArrayList;
 
 public class StockGrabber implements Subject{
 
-    public ArrayList<Observer> observers;
-    public double ibmPrice;
-    public double googPrice;
-    public double applPrice;
+    private ArrayList<Observer> observers;
+    private double ibmPrice;
+    private double googPrice;
+    private double applPrice;
 
     public StockGrabber(){
 

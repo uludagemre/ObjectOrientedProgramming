@@ -1,4 +1,4 @@
-package observer;
+package observer.StockApplication;
 
 public class StockObserver implements Observer {
 
