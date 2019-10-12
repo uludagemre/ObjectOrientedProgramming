@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e71c7fd8-443f-4e2c-8f7d-b3667a9d01ca" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Patterns/META-INF/Patterns.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Patterns/observer/GetTheStock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Patterns/observer/GetTheStock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/observer/GetTheStock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/observer/GetTheStock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/singleton/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/singleton/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,7 +31,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/recommendation-api" />
+    <property name="last_opened_file_path" value="$USER_HOME$/genesis" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -124,7 +119,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
