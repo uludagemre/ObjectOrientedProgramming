@@ -15,9 +15,12 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+enum GameStatus{
+	Won,Lost,Undecided
+}
 public class Game extends JPanel implements KeyListener, ActionListener 
 {
-	
+
 	private boolean play = false;
 	private int score = 0;
 	private int totalBricks = 48;
@@ -28,109 +31,79 @@ public class Game extends JPanel implements KeyListener, ActionListener
 	private int ballposY = 350;
 	private int ballXdir = -1;
 	private int ballYdir = -2;
-	private final int L;
-	
+	private int paddleLength = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()/10); //Ten percent of the screen width.
+	public GameStatus status = GameStatus.Undecided;
+	private Renderer gameRenderer;
 	private Map map;
-	
 	public Game()
 	{		
 		map = new Map(4, 12);
 		addKeyListener(this);
-		setFocusable(true);
-		setFocusTraversalKeysEnabled(false);
-        timer=new Timer(delay,this);
+		timer=new Timer(delay,this);
 		timer.start();
-		L = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth()/10);
-	}
-	
-	@Override
-	  protected void paintComponent(Graphics g) {
-		Image img = Toolkit.getDefaultToolkit().getImage("background.jpg");
-	    super.paintComponent(g);
-	    
-	        g.drawImage(img, 0, 0, null);
-	}
-	
-	public void paint(Graphics g)
-	{    		
-		paintComponent(g);
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		//The paddle length L is 10% of the screen width.
-		//This L is going to be used as bases to measure other variables in the rest of this document.
-		//The paddle thickness T is 20px.
-		// the screen height
-		screenSize.getHeight();
+		Renderer gameRenderer = new Renderer(this);
 
-		// the screen width
-		screenSize.getWidth();
-		
-		 
-        
-    // 	Image img = Toolkit.getDefaultToolkit().getImage("/Users/mac/Desktop/workspace/Java-Game-Brick-Breaker-master (1).zip_expanded/Java-Game-Brick-Breaker-master/src/background.jpg");
-     	
-		
-		// background
+	}
+
+	public Renderer getGameRenderer() {
+		return gameRenderer;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public int getPlayerX() {
+		return playerX;
+	}
+
+	public int getBallposX() {
+		return ballposX;
+	}
+
+	public int getBallposY() {
+		return ballposY;
+	}
+
+	public int getBallXdir() {
+		return ballXdir;
+	}
+
+	public int getBallYdir() {
+		return ballYdir;
+	}
+
+	public Renderer getRenderer() {
+		return this.gameRenderer;
+	}
+	public int getL() {
+		return paddleLength;
+	}
+	public GameStatus getGameStatus() {
+		return status;
+	}
+	public Map getMap() {
+		return map;
+	}
 	
-		g.setColor(Color.black);
-		g.fillRect(1, 1, 692, 592);
-		
-		// drawing map
-		map.draw((Graphics2D) g);
-		
-		// borders
-		g.setColor(Color.yellow);
-		g.fillRect(0, 0, 3, 592);
-		g.fillRect(0, 0, 692, 3);
-		g.fillRect(691, 0, 3, 592);
-		
-		// the scores 		
-		g.setColor(Color.white);
-		g.setFont(new Font("serif",Font.BOLD, 25));
-		g.drawString(""+score, 590,30);
-		
-		// the paddle
-		g.setColor(Color.green);
-		g.fillRect(playerX, 550, L, 20);
-		
-		// the ball
-		g.setColor(Color.yellow);
-		g.fillOval(ballposX, ballposY, 20, 20);
-	
-		// when you won the game
+	public void decideGameStatus() {
 		if(totalBricks <= 0)
 		{
-			 play = false;
-             ballXdir = 0;
-     		 ballYdir = 0;
-             g.setColor(Color.RED);
-             g.setFont(new Font("serif",Font.BOLD, 30));
-             g.drawString("You Won", 260,300);
-             
-             g.setColor(Color.RED);
-             g.setFont(new Font("serif",Font.BOLD, 20));           
-             g.drawString("Press (Enter) to Restart", 230,350);  
+			play = false;
+			ballXdir = 0;
+			ballYdir = 0;
+			status = GameStatus.Won;
 		}
-		
-		
-		
-		// when you lose the game
 		if(ballposY > 570)
-        {
-			 play = false;
-             ballXdir = 0;
-     		 ballYdir = 0;
-             g.setColor(Color.RED);
-             g.setFont(new Font("serif",Font.BOLD, 30));
-             g.drawString("Game Over, Scores: "+score, 190,300);
-             
-             g.setColor(Color.RED);
-             g.setFont(new Font("serif",Font.BOLD, 20));           
-             g.drawString("Press (Enter) to Restart", 230,350);        
-        }
-		
-		g.dispose();
-	}	
+		{
+			play = false;
+			ballXdir = 0;
+			ballYdir = 0;
+			status = GameStatus.Lost;
+		}
 
+	}
+	
 	public void keyPressed(KeyEvent e) 
 	{
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
@@ -143,8 +116,8 @@ public class Game extends JPanel implements KeyListener, ActionListener
 			{
 				moveRight();
 			}
-        }
-		
+		}
+
 		if (e.getKeyCode() == KeyEvent.VK_LEFT)
 		{          
 			if(playerX < 10)
@@ -155,12 +128,12 @@ public class Game extends JPanel implements KeyListener, ActionListener
 			{
 				moveLeft();
 			}
-        }		
+		}		
 		if (e.getKeyCode() == KeyEvent.VK_ENTER)
 		{          
 			if(!play)
 			{
-				
+
 				play = true;
 				ballposX = 120;
 				ballposY = 530;
@@ -169,43 +142,42 @@ public class Game extends JPanel implements KeyListener, ActionListener
 				playerX = 310;
 				score = 0;
 				totalBricks = 21;
-				map = new Map(4, 12);
-				
+
 				repaint();
 			}else switchMode();
-        }		
+		}		
 	}
-	
-	
+
+
 	public void switchMode() {
-	
-	if(timer.isRunning()) {
-		timer.stop();
-	}else timer.start();
-	
+
+		if(timer.isRunning()) {
+			timer.stop();
+		}else timer.start();
+
 	}
-	
-	
-	
-	
+
+
+
+
 
 	public void keyReleased(KeyEvent e) {
-		 
+
 	}
 	public void keyTyped(KeyEvent e) {}
-	
+
 	public void moveRight()
 	{
 		play = true;
 		playerX+=20;	
 	}
-	
+
 	public void moveLeft()
 	{
 		play = true;
 		playerX-=20;	 	
 	}
-	
+
 	public void actionPerformed(ActionEvent e) 
 	{
 		timer.start();
@@ -225,7 +197,7 @@ public class Game extends JPanel implements KeyListener, ActionListener
 			{
 				ballYdir = -ballYdir;
 			}
-			
+
 			// check map collision with the ball		
 			A: for(int i = 0; i<map.map.length; i++)
 			{
@@ -238,17 +210,17 @@ public class Game extends JPanel implements KeyListener, ActionListener
 						int brickY = i * map.brickHeight + 50;
 						int brickWidth = map.brickWidth;
 						int brickHeight = map.brickHeight;
-						
+
 						Rectangle rect = new Rectangle(brickX, brickY, brickWidth, brickHeight);					
 						Rectangle ballRect = new Rectangle(ballposX, ballposY, 20, 20);
 						Rectangle brickRect = rect;
-						
+
 						if(ballRect.intersects(brickRect))
 						{					
 							map.setBrickValue(0, i, j);
 							score+=5;	
 							totalBricks--;
-							
+
 							// when ball hit right or left of brick
 							if(ballposX + 19 <= brickRect.x || ballposX + 1 >= brickRect.x + brickRect.width)	
 							{
@@ -259,16 +231,16 @@ public class Game extends JPanel implements KeyListener, ActionListener
 							{
 								ballYdir = -ballYdir;				
 							}
-							
+
 							break A;
 						}
 					}
 				}
 			}
-			
+
 			ballposX += ballXdir;
 			ballposY += ballYdir;
-			
+
 			if(ballposX < 0)
 			{
 				ballXdir = -ballXdir;
@@ -281,8 +253,8 @@ public class Game extends JPanel implements KeyListener, ActionListener
 			{
 				ballXdir = -ballXdir;
 			}		
-			
-			repaint();		
+			decideGameStatus();
+			gameRenderer.repaint();
 		}
 	}
 }

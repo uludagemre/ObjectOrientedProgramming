@@ -8,10 +8,9 @@ public class Runner {
 		Board gameBoard = Board.getInstance();
 		//The game will ask the user what kind of a map he/she wants the game to be performed on!
 		Game game = new Game();		
-		
-		
-//		obj.add(gamePlay);
-//      obj.setVisible(true);
+		gameBoard.add(game);
+		gameBoard.setVisible(true);
+
                 
            
 	}
