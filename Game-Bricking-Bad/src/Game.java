@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -14,30 +15,26 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class Gameplay extends JPanel implements KeyListener, ActionListener 
+public class Game extends JPanel implements KeyListener, ActionListener 
 {
 	
 	private boolean play = false;
 	private int score = 0;
-	
 	private int totalBricks = 48;
-	
 	private Timer timer;
 	private int delay=8;
-	
 	private int playerX = 310;
-	
 	private int ballposX = 120;
 	private int ballposY = 350;
 	private int ballXdir = -1;
 	private int ballYdir = -2;
 	private final int L;
 	
-	private MapGenerator map;
+	private Map map;
 	
-	public Gameplay()
+	public Game()
 	{		
-		map = new MapGenerator(4, 12);
+		map = new Map(4, 12);
 		addKeyListener(this);
 		setFocusable(true);
 		setFocusTraversalKeysEnabled(false);
@@ -172,7 +169,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener
 				playerX = 310;
 				score = 0;
 				totalBricks = 21;
-				map = new MapGenerator(4, 12);
+				map = new Map(4, 12);
 				
 				repaint();
 			}else switchMode();

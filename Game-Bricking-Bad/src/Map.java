@@ -2,13 +2,13 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class MapGenerator 
+public class Map 
 {
 	public int map[][];
 	public int brickWidth;
 	public int brickHeight;
 	
-	public MapGenerator (int row, int col)
+	public Map (int row, int col)
 	{
 		map = new int[row][col];		
 		for(int i = 0; i<map.length; i++)
