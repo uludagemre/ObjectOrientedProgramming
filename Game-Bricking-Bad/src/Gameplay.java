@@ -19,14 +19,10 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener
 	
 	private boolean play = false;
 	private int score = 0;
-	
-	private int totalBricks = 48;
-	
+	private int totalBricks = 48;	
 	private Timer timer;
 	private int delay=8;
-	
 	private int playerX = 310;
-	
 	private int ballposX = 120;
 	private int ballposY = 350;
 	private int ballXdir = -1;
@@ -188,10 +184,6 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener
 	
 	}
 	
-	
-	
-	
-
 	public void keyReleased(KeyEvent e) {
 		 
 	}
